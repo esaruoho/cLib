@@ -10,7 +10,7 @@ Static methods for dealing with the file-system
 
 ]]
 
-require (_clibroot.."cString")
+require("cString")
 
 class 'cFilesystem'
 
@@ -42,6 +42,34 @@ function cFilesystem.get_userdata_folder()
   end
 
 end
+
+
+---------------------------------------------------------------------------------------------------
+
+function cFilesystem.get_user_folder()
+  local bundle_path = renoise.tool().bundle_path
+  local platform = os.platform()
+  if (platform == "WINDOWS") then 
+    local offset = string.find(bundle_path,"AppData")
+    return string.sub(bundle_path,1,offset-1)
+  elseif (platform == "MACINTOSH") then 
+    local offset = string.find(bundle_path,"Library")
+    return string.sub(bundle_path,1,offset-1)
+  elseif (platform == "LINUX") then 
+    local offset = string.find(bundle_path,"%.config")
+    if offset then
+      return string.sub(bundle_path,1,offset-1)
+    else
+      -- Fallback to environment variable or default
+      local home = os.getenv("HOME")
+      if home then
+        return home .. "/"
+      else
+        return "/home/" .. (os.getenv("USER") or "user") .. "/"
+      end
+    end
+  end 
+end  
 
 ---------------------------------------------------------------------------------------------------
 
