@@ -18,7 +18,7 @@ cSandbox allows you to execute code in a controlled environment.
       "print('hello world')"
 
     -- and call it...
-    sandbox.callback()
+    sandback.callback()
 
 
 ## Arguments and return values
@@ -39,7 +39,7 @@ cSandbox allows you to execute code in a controlled environment.
       "print(some_arg)"
 
     -- now call the function like this:
-    local result = sandbox.callback('my_arg')
+    local result = sandback.callback('my_arg')
 
 
 ## Custom properties
@@ -48,7 +48,7 @@ TODO how to ...
 
 ]]
 
-require (_clibroot.."cString")
+require("cString")
 
 class 'cSandbox'
 

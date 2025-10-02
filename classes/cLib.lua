@@ -15,8 +15,8 @@ therefore, it is recommended that any cLib-powered tool includes this file
 
 --=================================================================================================
 
-require (_clibroot.."cValue")
-require (_clibroot.."cNumber")
+require("cValue")
+require("cNumber")
 
 ---------------------------------------------------------------------------------------------------
 
@@ -269,12 +269,12 @@ function cLib.least_common(t)
 end
 
 ---------------------------------------------------------------------------------------------------
--- [Static] Round value
+-- [Static] Round value (from http://lua-users.org/wiki/SimpleRound)
 -- @param num (number)
 
-function cLib.round_value(num)
-  local frac = num %1
-  return frac < 0.5 and num - frac or num + 1 - frac
+function cLib.round_value(num) 
+  if num >= 0 then return math.floor(num+.5) 
+  else return math.ceil(num-.5) end
 end
 
 ---------------------------------------------------------------------------------------------------
@@ -320,7 +320,7 @@ end
 -- @return number
 
 function cLib.fraction(val)
-  return val % 1
+  return val-math.floor(val)
 end
 
 ---------------------------------------------------------------------------------------------------
