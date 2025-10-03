@@ -1,5 +1,6 @@
 name: Package cLib as .XRNX
 
+# Updated to include SLAXML fix
 on:
   workflow_dispatch:
   push:
