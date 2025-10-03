@@ -8,17 +8,17 @@ Schedule tasks to execute after a defined amount of time.
 
 ## About
 
-## Changelog 
+## Changelog
 
 1.04
-- Dynamically add/detach idle notifier as the need arises 
+- Dynamically add/detach idle notifier as the need arises
 
 
 ]]--
 
 --=================================================================================================
 
-class 'cScheduler' 
+class 'cScheduler'
 
 --------------------------------------------------------------------------------
 
@@ -37,8 +37,6 @@ end
 --- Perform idle task (check when it's time to execute a task)
 
 function cScheduler:on_idle()
-
-  -- check time
   for idx,task in ripairs(self.tasks) do
     if (task.time<=os.clock()) then
       self:_execute_task(task)
@@ -56,16 +54,15 @@ end
 -- @param delay (number) the delay before executing task
 -- @param ... (Vararg) variable number of extra arguments
 
-function cScheduler:add_task(ref,func,delay, ...)
-  TRACE("cScheduler:add_task()",ref,func,delay)
-
-  local task = cScheduledTask(ref,func,delay,arg)
+function cScheduler:add_task(ref, func, delay, ...)
+  TRACE("cScheduler:add_task()", ref, func, delay)
+  local task = cScheduledTask(ref, func, delay, {...})
   self.tasks:insert(task)
 
   local obs = renoise.tool().app_idle_observable
   local fn = cScheduler.on_idle
-  if not obs:has_notifier(self,fn) then
-    obs:add_notifier(self,fn)
+  if not obs:has_notifier(self, fn) then
+    obs:add_notifier(self, fn)
   end
 
   return task
@@ -75,7 +72,7 @@ end
 
 --------------------------------------------------------------------------------
 
---- Remove a previously scheduled task 
+--- Remove a previously scheduled task
 -- @param ref (cScheduledTask) reference to the task
 
 function cScheduler:remove_task(ref)
@@ -109,9 +106,9 @@ function cScheduler:_execute_task(task)
   TRACE("cScheduler:_execute_task",task)
 
   if task.ref then
-    task.func(task.ref,unpack(task.args))
+    task.func(task.ref,table.unpack(task.args))
   else
-    task.func(unpack(task.args))
+    task.func(table.unpack(task.args))
   end
 end
 
@@ -120,7 +117,7 @@ end
 -- cScheduledTask
 ----------------------------------------------------------------------------]]--
 
-class 'cScheduledTask' 
+class 'cScheduledTask'
 
 --------------------------------------------------------------------------------
 
@@ -143,6 +140,4 @@ end
 
 function cScheduledTask:__eq(other)
   return rawequal(self, other)
-end  
-
-
+end

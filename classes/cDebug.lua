@@ -23,7 +23,6 @@ Some examples:
 --_trace_filters = {".*"}
 
 require(_clibroot.."cFilesystem")
-require(_clibroot.."cParseXML")
 
 class 'cDebug'
 
