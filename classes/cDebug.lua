@@ -22,7 +22,7 @@ Some examples:
 
 --_trace_filters = {".*"}
 
-require("cFilesystem")
+require(_clibroot.."cFilesystem")
 
 class 'cDebug'
 

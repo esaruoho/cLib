@@ -48,7 +48,7 @@ TODO how to ...
 
 ]]
 
-require("cString")
+require(_clibroot.."cString")
 
 class 'cSandbox'
 
@@ -101,7 +101,7 @@ function cSandbox:__init()
     assert = _G.assert,
     error = _G.error,
     ipairs = _G.ipairs,
-    loadstring = _G.loadstring,
+    loadstring = _G.load,
     math = _G.math,
     next = _G.next,
     pairs = _G.pairs,
@@ -113,7 +113,7 @@ function cSandbox:__init()
     tonumber = _G.tonumber,
     tostring = _G.tostring,
     type = _G.type,
-    unpack = _G.unpack,
+    unpack = _G.table.unpack,
     -- renoise extended
     ripairs = _G.ripairs,
     rprint = _G.rprint,
@@ -235,12 +235,12 @@ function cSandbox:compile()
   end
 
   local str_combined = self:prepare_callback(self.callback_str)
-  local def,err = loadstring(str_combined)
+  local def,err = load(str_combined)
   if not def then
     return false,err
   end 
   self.callback = def()
-  setfenv(self.callback, self.env)
+  _ENV(self.callback, self.env)
 
   return true
 
@@ -274,9 +274,9 @@ function cSandbox:test_syntax(str_fn)
   TRACE("cSandbox:test_syntax(str_fn)",str_fn)
 
   local function untrusted_fn()
-    assert(loadstring(str_fn))
+    assert(load(str_fn))
   end
-  setfenv(untrusted_fn, self.env)
+  _ENV(untrusted_fn, self.env)
   local pass,err = pcall(untrusted_fn)
   if not pass then
     return false,err
