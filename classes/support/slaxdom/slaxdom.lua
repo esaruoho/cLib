@@ -1,5 +1,5 @@
 -- Optional parser that creates a flat DOM from parsing
-local SLAXML = require 'cLib.classes.support.slaxdom.slaxml'
+-- Note: SLAXML is loaded via dofile in cParseXML.lua before this file, so we can use it directly
 function SLAXML:dom(xml,opts)
 	if not opts then opts={} end
 	local rich = not opts.simple
