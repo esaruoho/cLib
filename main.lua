@@ -22,6 +22,7 @@ _test_path = "unit_tests"
 
 _trace_filters = {".*"}
 _clibroot = "classes/"
+separator = package.config:sub(1,1)  -- Gets \ for Windows, / for Unix
 
 require (_clibroot.."cLib")
 require (_clibroot.."cDebug")
