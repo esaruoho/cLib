@@ -14,8 +14,8 @@ TODO implement more xpath-alike methods
 
 class 'cParseXML' 
 
--- Note: SLAXML is now self-contained in slaxml.lua
-require(_clibroot.."support"..separator.."slaxdom"..separator.."slaxml")
+-- Note: SLAXML is loaded via slaxdom wrapper
+local SLAXML = require(_clibroot.."support"..separator.."slaxdom"..separator.."slaxdom")
 
 -------------------------------------------------------------------------------
 --- load and parse XML from disk

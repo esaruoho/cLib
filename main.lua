@@ -2,6 +2,44 @@
 main.lua
 ============================================================================]]--
 
+-- Simple class function implementation for compatibility
+if not class then
+  function class(name, parent)
+    local class_table = {}
+    class_table.__index = class_table
+    class_table.__name = name
+    
+    if parent then
+      setmetatable(class_table, {__index = parent})
+    end
+    
+    local constructor = function(self, ...)
+      local instance = {}
+      setmetatable(instance, class_table)
+      if class_table.__init then
+        class_table.__init(instance, ...)
+      end
+      return instance
+    end
+    
+    _G[name] = constructor
+    return constructor
+  end
+end
+
+-- Simple table.create implementation for compatibility
+if not table.create then
+  function table.create(size, default_value)
+    local t = {}
+    if size then
+      for i = 1, size do
+        t[i] = default_value
+      end
+    end
+    return t
+  end
+end
+
 --[[
 
 Unit-tests for the cLib library
