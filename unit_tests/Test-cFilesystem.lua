@@ -134,7 +134,28 @@ Will it be the same once loaded from disk?]]
 
   -- repeat, but using the unique filename as basis
   -- the method should detect the (1) and use it as basis 
+  print("DEBUG: Testing ensure_unique_filename with:", unique_file_path_1)
+  
+  -- Let's debug what happens step by step
+  local folder, filename, extension = cFilesystem.get_path_parts(unique_file_path_1)
+  print("DEBUG: get_path_parts returned:")
+  print("  folder:", folder)
+  print("  filename:", filename)
+  print("  extension:", extension)
+  
+  local file_no_ext = extension 
+    and cFilesystem.file_strip_extension(filename,extension)
+    or filename
+  print("DEBUG: file_no_ext after strip_extension:", file_no_ext)
+  
+  local count, clean_name = cString.detect_counter_in_str(file_no_ext)
+  print("DEBUG: detect_counter_in_str returned:")
+  print("  count:", count)
+  print("  clean_name:", clean_name)
+  
   local unique_file_path_2 = cFilesystem.ensure_unique_filename(unique_file_path_1)
+  print("DEBUG: ensure_unique_filename returned:", unique_file_path_2)
+  print("DEBUG: Expected:", relative_path.."file (2).tmp")
   assert(unique_file_path_2 == relative_path.."file (2).tmp",unique_file_path_2)
   assert(cFilesystem.write_string_to_file(unique_file_path_2,str_test))
 
