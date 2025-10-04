@@ -118,7 +118,8 @@ end
 -- @return table or nil
 
 function cLib.pack_args(...)
-  return (#arg >0) and arg or nil
+  local args = {...}
+  return (#args > 0) and args or nil
 end
 
 ---------------------------------------------------------------------------------------------------
@@ -180,10 +181,11 @@ end
 
 function cLib.average(...)
   local rslt = 0
-  for i=1, #arg do
-    rslt = rslt+arg[i]
+  local n = select('#', ...)
+  for i=1, n do
+    rslt = rslt + select(i, ...)
   end
-	return rslt/#arg
+	return rslt/n
 end
 
 ---------------------------------------------------------------------------------------------------

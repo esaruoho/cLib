@@ -245,7 +245,7 @@ function cFilesystem.ensure_unique_filename(file_path)
     and cFilesystem.file_strip_extension(filename,extension)
     or filename
 
-  local count = cString.detect_counter_in_str(file_no_ext)
+  local count, file_no_ext = cString.detect_counter_in_str(file_no_ext)
 
   while (io.exists(rslt)) do
     if extension then

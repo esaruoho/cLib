@@ -76,13 +76,13 @@ end
 -- detect counter in string (used for incrementing, unique names)
 
 function cString.detect_counter_in_str(str)
-  local count = string.match(str,"%((%d)%)$")
+  local count = string.match(str,"%((%d+)%)$")
   if count then 
-    str = string.gsub(str,"%s*%(%d%)$","")
+    str = string.gsub(str,"%s*%(%d+%)$","")
   else
     count = 1
   end
-  return count
+  return count, str
 end
 
 -------------------------------------------------------------------------------
