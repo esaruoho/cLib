@@ -79,8 +79,9 @@ function cString.detect_counter_in_str(str)
   local count = string.match(str,"%((%d+)%)$")
   if count then 
     str = string.gsub(str,"%s*%(%d+%)$","")
+    count = tonumber(count)
   else
-    count = 1
+    count = 0
   end
   return count, str
 end
