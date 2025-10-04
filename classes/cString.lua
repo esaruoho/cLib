@@ -76,9 +76,11 @@ end
 -- detect counter in string (used for incrementing, unique names)
 
 function cString.detect_counter_in_str(str)
-  local count = string.match(str,"%((%d+)%)$")
+  -- Look for (number) pattern, but not necessarily at the end
+  -- This handles cases like "file (1).tmp" where the counter is before the extension
+  local count = string.match(str,"%((%d+)%)")
   if count then 
-    str = string.gsub(str,"%s*%(%d+%)$","")
+    str = string.gsub(str,"%s*%(%d+%)","")
     count = tonumber(count)
   else
     count = 0
