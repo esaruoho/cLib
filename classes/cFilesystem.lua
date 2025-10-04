@@ -248,12 +248,12 @@ function cFilesystem.ensure_unique_filename(file_path)
   local count, file_no_ext = cString.detect_counter_in_str(file_no_ext)
 
   while (io.exists(rslt)) do
+    count = count + 1
     if extension then
       rslt = ("%s%s (%d).%s"):format(folder,file_no_ext,count,extension)
     else
       rslt = ("%s%s (%d)"):format(folder,file_no_ext,count)
     end
-    count = count + 1
   end
   return rslt
 
