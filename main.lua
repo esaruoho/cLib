@@ -10,7 +10,14 @@ if not class then
     class_table.__name = name
     
     if parent then
-      setmetatable(class_table, {__index = parent})
+      -- Handle inheritance properly
+      if type(parent) == "string" then
+        -- Parent is a string name, get the actual class
+        parent = _G[parent]
+      end
+      if parent then
+        setmetatable(class_table, {__index = parent})
+      end
     end
     
     local constructor = function(self, ...)
