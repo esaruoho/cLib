@@ -78,13 +78,17 @@ end
 function cString.detect_counter_in_str(str)
   -- Look for (number) pattern, but not necessarily at the end
   -- This handles cases like "file (1).tmp" where the counter is before the extension
+  print("DEBUG detect_counter_in_str: input str = '" .. str .. "'")
   local count = string.match(str,"%((%d+)%)")
+  print("DEBUG detect_counter_in_str: matched count = " .. tostring(count))
   if count then 
     str = string.gsub(str,"%s*%(%d+%)","")
+    print("DEBUG detect_counter_in_str: after gsub str = '" .. str .. "'")
     count = tonumber(count)
   else
     count = 0
   end
+  print("DEBUG detect_counter_in_str: returning count = " .. count .. ", str = '" .. tostring(str) .. "'")
   return count, str
 end
 
