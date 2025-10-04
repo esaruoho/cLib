@@ -152,6 +152,11 @@ Will it be the same once loaded from disk?]]
   print("DEBUG: detect_counter_in_str returned:")
   print("  count:", count)
   print("  clean_name:", clean_name)
+  print("  clean_name type:", type(clean_name))
+  
+  -- Let's test the gsub directly
+  local test_gsub = string.gsub(file_no_ext, "%s*%(%d+%)", "")
+  print("DEBUG: Direct gsub test on '" .. file_no_ext .. "' = '" .. test_gsub .. "'")
   
   local unique_file_path_2 = cFilesystem.ensure_unique_filename(unique_file_path_1)
   print("DEBUG: ensure_unique_filename returned:", unique_file_path_2)
