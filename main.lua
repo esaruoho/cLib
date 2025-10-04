@@ -72,6 +72,7 @@ separator = package.config:sub(1,1)  -- Gets \ for Windows, / for Unix
 require (_clibroot.."cLib")
 require (_clibroot.."cDebug")
 require (_clibroot.."cFilesystem")
+require (_clibroot.."cParseXML")
 
 require ("vDialog")
 require ("TestRunner")

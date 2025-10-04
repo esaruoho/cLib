@@ -10,7 +10,7 @@ fn = function()
 
   print (">>> cParseXML: starting unit-test...")
 
-  cLib.require (_clibroot.."classes"..separator.."cParseXML")
+  cLib.require (_clibroot.."cParseXML")
   _trace_filters = {"^cParseXML*"}
 
   -- First try with some broken XML
