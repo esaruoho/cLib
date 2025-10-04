@@ -16,7 +16,7 @@ PLANNED
 
 
 ]]
-
+local SLAXML=nil
 _tests = table.create()
 _test_path = "unit_tests"
 

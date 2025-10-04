@@ -14,9 +14,8 @@ TODO implement more xpath-alike methods
 
 class 'cParseXML' 
 
--- Note: SLAXML files need to be loaded with dofile since they're in a subdirectory
-dofile(_clibroot.."support"..separator.."slaxdom"..separator.."slaxml.lua")
-dofile(_clibroot.."support"..separator.."slaxdom"..separator.."slaxdom.lua")
+-- Note: SLAXML is now self-contained in slaxml.lua
+require(_clibroot.."support"..separator.."slaxdom"..separator.."slaxml")
 
 -------------------------------------------------------------------------------
 --- load and parse XML from disk
